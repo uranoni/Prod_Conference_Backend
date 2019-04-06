@@ -1,0 +1,35 @@
+{
+  "name": "prod_conference_backend",
+  "version": "1.0.0",
+  "description": "this is conference bacjend project use GraphQL",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./src/server.js --exec babel-node -e js,graphql,json",
+    "clean": "rm -rf dist && mkdir dist",
+    "build": "babel src -d dist --copy-files",
+    "start": "node ./dist/server.js"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0"
+  },
+  "dependencies": {
+    "apollo-server-express": "^2.1.0",
+    "bcryptjs": "^2.4.3",
+    "dayjs": "^1.8.12",
+    "express": "^4.16.4",
+    "graphql": "^14.0.2",
+    "graphql-tools": "^4.0.3",
+    "jsonwebtoken": "^8.4.0",
+    "lodash": "^4.17.11",
+    "merge-graphql-schemas": "^1.5.7",
+    "mkdirp": "^0.5.1",
+    "mongoose": "^5.3.14",
+    "morgan": "^1.9.1",
+    "shortid": "^2.2.14",
+    "uuid": "^3.3.2"
+  },
+  "author": "Roni",
+  "license": "ISC"
+}

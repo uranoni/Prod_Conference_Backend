@@ -1,0 +1,53 @@
+type Token {
+    id: ID
+    token: String
+    device: String
+    requestIp: String
+}
+
+type User {
+    id: ID!
+    username: String!
+    email: String!
+    access: Access
+    token: Token!
+}
+
+type Access {
+    role: String
+    group: String
+}
+type Query {
+    checkToken: User
+    getUsers: [User!]!
+}
+
+type Mutation {
+    signup(
+        email: String,
+        username: String,
+        password: String
+    ): User
+    login(
+        email: String,
+        password: String
+    ): User
+    logout: LogoutResponse
+    updateUser(data: UserInput): User
+}
+
+input UserInput {
+    id: String
+    username: String
+    email: String
+    access: AccessInput
+}
+
+input AccessInput {
+    group: String
+    role: String
+}
+
+type LogoutResponse {
+  message: String
+}

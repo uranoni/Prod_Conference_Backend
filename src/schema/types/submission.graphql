@@ -1,0 +1,50 @@
+type Query{
+  getSubmission:[Submission]!
+}
+
+type Mutation{
+  submitPaper(data:submitPaperData): Submission!
+}
+
+type Submission {
+  pid: String!
+  title: String!
+  contact: [Contactuser]
+  labels: [Label]
+  abstract: String
+  authorsData: [AuthorData]
+  published: Boolean
+  reference: [Refdata]
+  createAt: String
+  updateAt: String
+  paperpath: String
+  papername: String
+}
+
+input submitPaperData {
+  title: String!
+  contactEmail: String!
+  contactName: String!
+  label: String
+  author: String
+  abstract:String!
+}
+
+type Label{
+  labelname: String!
+}
+type Contactuser{
+  email: String
+  username: String
+  phone: String
+}
+type AuthorData{
+  author: String
+  description: String
+  school: String
+}
+
+type Refdata{
+  reflink: String
+  reftittle: String
+}

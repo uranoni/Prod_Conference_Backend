@@ -1,0 +1,8 @@
+{
+  "dev": {
+      "PORT": 4000,
+      "JWT_SECRET": "conferpwd2019",
+      "SSL": false,
+      "HOSTNAME": "localhost"
+  }
+}
