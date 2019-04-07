@@ -25,18 +25,21 @@ export default {
                 uersname:args.data.contactName,
                 phone: args.data.phone || null
             }
-
+            var labels = []
+            labels.push({label:args.data.label})
+            console.log(labels)
             const paper = {
                 pid:uuidv4(),
                 title:args.data.title,
                 contact,
-                label:args.data.label,
+                labels,
                 abstract:args.data.abstract,
                 createAt:dayjs().format('YYYY年MM月DD日 HH:mm:ss'),
             }
             const newSubmission =  new ctx.db.Submission(paper)
             newSubmission.save(function (err) {
                 if (err){
+                    console.log(err)
                     return ("Submit fail")
                 }});
                   

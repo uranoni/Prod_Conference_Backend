@@ -15,7 +15,7 @@ const schema = new mongoose.Schema({
       username:{type:String},
       phone: { type: String }
     }],
-    label:[{ type: String }] ,
+    labels:[{label:{ type: String }}] ,
     abstract: {
         type: String
     },
