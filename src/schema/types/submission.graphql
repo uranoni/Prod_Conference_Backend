@@ -3,7 +3,7 @@ type Query{
 }
 
 type Mutation{
-  submitPaper(data:submitPaperData): Submission!
+  submitPaper(data: SubmitPaperData!, labels: [labelarray]): Submission!
 }
 
 type Submission {
@@ -21,15 +21,17 @@ type Submission {
   papername: String
 }
 
-input submitPaperData {
+input SubmitPaperData {
   title: String!
   contactEmail: String!
   contactName: String!
-  label: String
   author: String
   abstract:String!
 }
 
+input labelarray{
+  label: String!
+}
 type Label{
   label: String!
 }

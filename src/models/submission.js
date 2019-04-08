@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 
 const schema = new mongoose.Schema({
-    pid:{
-        type:String,
+    pid: {
+        type: String,
         required: true,
         unique: true
     },
@@ -10,12 +10,12 @@ const schema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    contact:[ {
-      email:{type: String},
-      username:{type:String},
-      phone: { type: String }
+    contact: [{
+        email: { type: String },
+        username: { type: String },
+        phone: { type: String }
     }],
-    labels:[{label:{ type: String }}] ,
+    labels: [{ label: { type: String } }],
     abstract: {
         type: String
     },
@@ -24,22 +24,22 @@ const schema = new mongoose.Schema({
         description: { type: String },
         school: { type: String }
     }],
-    published: { type:Boolean},
+    published: { type: Boolean, default: false },
     reference: [{
         reflink: { type: String },
         reftittle: { type: String },
-     }],
+    }],
     createAt: {
         type: String,
         required: true
     },
     updateAt: {
-      type: String
-  },
+        type: String
+    },
     paperpath: {
-      type: String,
-  },
-    papername:{
+        type: String,
+    },
+    papername: {
         type: String
     }
 })

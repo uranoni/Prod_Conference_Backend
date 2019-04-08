@@ -10,20 +10,20 @@ export default {
     Query: {
         checkToken: async (root, args, ctx) => {
             if (await ctx.user === null) {
-                
+
                 return new AuthenticationError("You need to be authenticated to access this schema!")
             }
             return ctx.user
         },
-        getUsers:async(root,args,ctx)=>{
-            const {db, user} = ctx
+        getUsers: async (root, args, ctx) => {
+            const { db, user } = ctx
             console.log(args)
-            if(!user  || user.access.role !== "admin"){
+            if (!user || user.access.role !== "admin") {
                 return new ForbiddenError("Permission Denied")
             }
-            
-                const users = await db.User.find() 
-                return users
+
+            const users = await db.User.find()
+            return users
         }
 
     },
@@ -46,7 +46,6 @@ export default {
         },
         signup: async (root, args, ctx) => {
             const device = ctx.req.get('user-agent');
-            console.log(ctx.db)
             const { username, email, password } = args;
             const requestIp = ctx.req.connection.remoteAddress;
             const newUser = new ctx.db.User({ username, email, password })
