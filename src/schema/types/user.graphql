@@ -10,7 +10,7 @@ type User {
     username: String!
     email: String!
     access: Access
-    token: Token!
+    tokens: [Token]!
 }
 
 type Access {

@@ -1,0 +1,49 @@
+type Query{
+  getPosts(pid: String,labels:String):[Post]
+}
+
+type Mutation{
+  submitPost(data: SubmitPostData!, labels: [Labelarray],pictures:[Pictures]): Post!
+}
+
+type Post {
+  pid: String!
+  title: String!
+  content: String!
+  labels: [Label]
+  author: [AuthorData]
+  picture:[Picture]
+  published: Boolean
+  createAt: String
+  updateAt: String
+}
+
+input SubmitPostData {
+  title: String!
+  content: String!
+  published: Boolean
+
+}
+input Labelarray{
+  label: String!
+}
+input Pictures{
+  picID: String
+  description: String
+  path: String
+  picdate: String
+}
+type Label{
+  label: String!
+}
+type Picture{
+  picID: String
+  description: String
+  path: String
+  picdate: String
+}
+type AuthorData{
+  author: String
+  description: String
+  contact: String
+}

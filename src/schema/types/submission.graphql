@@ -7,7 +7,7 @@ type Mutation{
 }
 
 type Submission {
-  pid: String!
+  sid: String!
   title: String!
   contact: [Contactuser]
   labels: [Label]

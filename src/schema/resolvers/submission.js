@@ -28,12 +28,12 @@ export default {
             const labels = args.labels
 
             const paper = {
-                pid: uuidv4(),
+                sid: uuidv4(),
                 title: args.data.title,
                 contact,
                 labels,
                 abstract: args.data.abstract,
-                createAt: dayjs().format('YYYY年MM月DD日 HH:mm:ss'),
+                createAt: dayjs().format('YYYY-MM-DD HH:mm:ss'),
             }
             const newSubmission = new ctx.db.Submission(paper)
             newSubmission.save(function (err) {

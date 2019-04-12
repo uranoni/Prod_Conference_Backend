@@ -1,7 +1,7 @@
 // import './config/config.dev.json'
 import express from 'express'
 import mongoose from 'mongoose'
-import { ApolloServer , PubSub } from 'apollo-server-express'
+import { ApolloServer, PubSub } from 'apollo-server-express'
 import { authentication } from './utilts/authentication'
 import http from 'http'
 // import https from 'https'
@@ -11,9 +11,11 @@ import db from './models/db'
 // import processUpload from './utilts/processUpload'
 // import initApp from './utilts/initApp'
 import path from 'path'
+// import cors from 'cors'
 
 const pubsub = new PubSub();
 const app = express();
+// app.use(cors())
 app.use(morgan('dev'))
 app.use('/uploads', express.static(path.resolve(__dirname, './uploads')))
 

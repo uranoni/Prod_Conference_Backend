@@ -18,11 +18,12 @@ export default {
         getUsers: async (root, args, ctx) => {
             const { db, user } = ctx
             console.log(args)
-            if (!user || user.access.role !== "admin") {
-                return new ForbiddenError("Permission Denied")
-            }
+            // if (!user || user.access.role !== "admin") {
+            //     return new ForbiddenError("Permission Denied")
+            // }
 
             const users = await db.User.find()
+            console.log(users)
             return users
         }
 
@@ -53,7 +54,8 @@ export default {
                 const saveUser = await newUser.save();
                 const { token, user } = await saveUser.generateAuthToken(requestIp, device);
                 ctx.res.header('x-access-token', token)
-                user.token = user.tokens[user.tokens.length - 1]
+                // user.token = user.tokens[user.tokens.length - 1]
+                user.tokens = user.tokens[user.tokens.length - 1]
                 return user;
             } catch (err) {
                 // console.log(err)
@@ -68,7 +70,7 @@ export default {
                 const authUser = await db.User.findByCredentials(email, password)
                 const { token, user } = await authUser.generateAuthToken(requestIp, device)
                 res.header('x-access-token', token)
-                user.token = user.tokens[user.tokens.length - 1]
+                user.tokens = user.tokens[user.tokens.length - 1]
                 return user
             } catch (err) {
                 throw new AuthenticationError(err)
