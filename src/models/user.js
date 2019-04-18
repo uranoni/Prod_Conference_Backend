@@ -25,7 +25,7 @@ const schema = new mongoose.Schema({
         required: true
     },
     access: {
-        role: { type: String ,default: 'student' },
+        role: { type: String, default: 'student' },
         group: { type: String }
     },
     tokens: [{
@@ -38,7 +38,16 @@ const schema = new mongoose.Schema({
         requestIp: {
             type: String
         }
-    }]
+    }],
+    labels: [{ type: String }],
+    verifyToken: {
+        token: { type: String },
+        exp: { type: Date }
+    },
+    verify: {
+        type: String,
+        default: false
+    }
 })
 
 schema.methods.generateAuthToken = function (requestIp, device) {

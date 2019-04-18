@@ -5,6 +5,8 @@ import {
     ApolloError
 } from 'apollo-server-express';
 import _ from 'lodash'
+import cryptoRandomString from 'crypto-random-string';
+
 
 export default {
     Query: {
@@ -87,6 +89,28 @@ export default {
             }).catch(err => {
                 throw new Error(err);
             })
+        },
+        jurorVerifyEmail: async (root, args, ctx) => {
+            const device = ctx.req.get('user-agent');
+            const requestIp = ctx.req.connection.remoteAddress;
+            const { email, labels, name } = { ...args }
+            const password = cryptoRandomString(10);
+            const token = cryptoRandomString(25);
+            const exp = Date.now() + 1000 * 60 * 60 * 24 * 7
+            const verifyToken = { token, exp }
+            const newUser = new ctx.db.User({ username: name, email, password, verifyToken, "access.role": "juror", labels })
+            try {
+                const saveUser = await newUser.save();
+                const { token, user } = await saveUser.generateAuthToken(requestIp, device);
+                ctx.res.header('x-access-token', token)
+                // user.token = user.tokens[user.tokens.length - 1]
+                user.tokens = user.tokens[user.tokens.length - 1]
+                return user;
+            } catch (err) {
+                // console.log(err)
+                throw new Error(err)
+            }
+
         }
     }
 }

@@ -1,3 +1,4 @@
+scalar Date
 type Token {
     id: ID
     token: String
@@ -11,8 +12,14 @@ type User {
     email: String!
     access: Access
     tokens: [Token]!
+    verify:Boolean
+    labels:[String]
+    verifyToken:TokenData
 }
-
+type TokenData{
+    token:String
+    exp:Date
+}
 type Access {
     role: String
     group: String
@@ -34,6 +41,7 @@ type Mutation {
     ): User
     logout: LogoutResponse
     updateUser(data: UserInput): User
+    jurorVerifyEmail(name:String!,email:String!,labels:[String]):User!
 }
 
 input UserInput {

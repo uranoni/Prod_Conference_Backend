@@ -1,33 +1,24 @@
 import mongoose from 'mongoose';
 
 const schema = new mongoose.Schema({
-    commentID:{
-      type: String,
-      required: true,
-      unique: true
-    },
-    paperID: {
-        type: String,
-        required: true,
-    },
-    text:{
-      type:String
-    },
-    grade:{
-      type:String
-    },
-    jurordata:[{
-      uid:{type: String},
-      jurorname:{type: String},
-      juroremail:{type: String}
-    }],
-    createAt: {
-        type: Date,
-        required: true
-    },
-    updateAt: {
-      type: Date,
-      required: true
+  paperID: {
+    type: String,
+    required: true,
+    ref: "Submission"
+  },
+  jurordata: [{
+    jid: { type: mongoose.Schema.Types.ObjectId },
+    jname: { type: String },
+    text: { type: String },
+    grade: { type: String },
+    status: { type: String },
+  }],
+  createAt: {
+    type: String,
+    required: true
+  },
+  updateAt: {
+    type: String,
   }
 })
 
