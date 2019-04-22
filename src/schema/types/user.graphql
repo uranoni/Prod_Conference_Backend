@@ -41,7 +41,12 @@ type Mutation {
     ): User
     logout: LogoutResponse
     updateUser(data: UserInput): User
-    jurorVerifyEmail(name:String!,email:String!,labels:[String]):User!
+    jurorVerifyEmail(
+        name:String!,
+        email:String!,
+        labels:[String]
+        ):User!
+    verifyAccount(token:String):User
 }
 
 input UserInput {

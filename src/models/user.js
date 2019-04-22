@@ -39,7 +39,7 @@ const schema = new mongoose.Schema({
             type: String
         }
     }],
-    labels: [{ type: String }],
+    labels: [{ type: String, }],
     verifyToken: {
         token: { type: String },
         exp: { type: Date }

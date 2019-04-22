@@ -30,6 +30,7 @@
     "merge-graphql-schemas": "^1.5.7",
     "mkdirp": "^0.5.1",
     "mongoose": "^5.3.14",
+    "mongoose-deep-populate": "^3.1.1",
     "morgan": "^1.9.1",
     "shortid": "^2.2.14",
     "uuid": "^3.3.2"

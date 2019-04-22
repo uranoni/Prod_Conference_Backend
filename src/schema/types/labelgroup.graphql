@@ -1,0 +1,19 @@
+type Query{
+    getAllGroup:[Labeldata]
+}
+
+type Labeldata{
+    labelname:String
+    papers:[Papers]
+    jurors:[Jurors]
+}
+
+type Papers{
+    paperID:String
+    paperTitle:String
+}
+
+type Jurors{
+    jurorID:String
+    jurorName:String
+}

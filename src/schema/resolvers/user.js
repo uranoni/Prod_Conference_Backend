@@ -6,6 +6,7 @@ import {
 } from 'apollo-server-express';
 import _ from 'lodash'
 import cryptoRandomString from 'crypto-random-string';
+import dayjs from 'dayjs';
 
 
 export default {
@@ -96,7 +97,7 @@ export default {
             const { email, labels, name } = { ...args }
             const password = cryptoRandomString(10);
             const token = cryptoRandomString(25);
-            const exp = Date.now() + 1000 * 60 * 60 * 24 * 7
+            const exp = dayjs().add(1, "week");
             const verifyToken = { token, exp }
             const newUser = new ctx.db.User({ username: name, email, password, verifyToken, "access.role": "juror", labels })
             try {
@@ -109,6 +110,24 @@ export default {
             } catch (err) {
                 // console.log(err)
                 throw new Error(err)
+            }
+
+        },
+        verifyAccount: async (root, args, { db }) => {
+            const { token } = args
+            try {
+                const user = await db.User.findOne({
+                    'verifyToken.token': token,
+                    'verifyToken.exp': { $gte: dayjs() }
+                })
+
+                user.verify = true
+                user.save();
+                return user;
+
+            }
+            catch (err) {
+                throw new AuthenticationError("invaild token")
             }
 
         }

@@ -13,13 +13,6 @@ const schema = new mongoose.Schema({
     grade: { type: String },
     status: { type: String },
   }],
-  createAt: {
-    type: String,
-    required: true
-  },
-  updateAt: {
-    type: String,
-  }
 })
 
 

@@ -1,16 +1,16 @@
 type Query{
-  getSubmission:[Submission]!
+  getSubmission(labels:String):[Submission]!
 }
 
 type Mutation{
-  submitPaper(data: SubmitPaperData!, labels: [labelarray]): Submission!
+  submitPaper(data: SubmitPaperData!, labels: [String]): Submission!
 }
 
 type Submission {
   sid: String!
   title: String!
   contact: [Contactuser]
-  labels: [Label]
+  labels: [String]
   abstract: String
   authorsData: [AuthorData]
   published: Boolean
@@ -29,12 +29,6 @@ input SubmitPaperData {
   abstract:String!
 }
 
-input labelarray{
-  label: String!
-}
-type Label{
-  label: String!
-}
 type Contactuser{
   email: String
   username: String

@@ -1,10 +1,11 @@
 import mongoose from 'mongoose';
 
 const schema = new mongoose.Schema({
+
     sid: {
         type: String,
         required: true,
-        unique: true
+
     },
     title: {
         type: String,
@@ -15,7 +16,7 @@ const schema = new mongoose.Schema({
         username: { type: String },
         phone: { type: String }
     }],
-    labels: [{ label: { type: String } }],
+    labels: [{ type: String, ref: "User" }],
     abstract: {
         type: String
     },
