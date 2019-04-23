@@ -1,66 +1,63 @@
-scalar Date
-type Token {
-    id: ID
-    token: String
-    device: String
-    requestIp: String
+enum RoleEnum {
+  ADMIN
+  JUROR
+  USER
 }
 
-type User {
-    id: ID!
-    username: String!
-    email: String!
-    access: Access
-    tokens: [Token]!
-    verify:Boolean
-    labels:[String]
-    verifyToken:TokenData
-}
-type TokenData{
-    token:String
-    exp:Date
-}
-type Access {
-    role: String
-    group: String
-}
 type Query {
-    checkToken: User
-    getUsers: [User!]!
+  checkToken: User
+  getUsers: [User!]!
+  users: [User]
 }
 
 type Mutation {
-    signup(
-        email: String,
-        username: String,
-        password: String
-    ): User
-    login(
-        email: String,
-        password: String
-    ): User
-    logout: LogoutResponse
-    updateUser(data: UserInput): User
-    jurorVerifyEmail(
-        name:String!,
-        email:String!,
-        labels:[String]
-        ):User!
-    verifyAccount(token:String):User
+  signup(email: String, username: String, password: String): User
+  login(email: String, password: String): User
+  logout: LogoutResponse @isAuthenticated
+  updateUser(data: UserInput): User @isAuthenticated
+  jurorVerifyEmail(name: String!, email: String!, labels: [String]): User!
+  verifyAccount(token: String): User
 }
 
-input UserInput {
-    id: String
-    username: String
-    email: String
-    access: AccessInput
+type Token {
+  id: ID
+  token: String
+  device: String
+  requestIp: String
 }
 
-input AccessInput {
-    group: String
-    role: String
+type User {
+  id: ID!
+  username: String!
+  email: String!
+  access: Access
+  tokens: [Token]!
+  verify: Boolean
+  labels: [String]
+  verifyToken: TokenData
+}
+
+type TokenData {
+  token: String
+  exp: Date
+}
+type Access {
+  role: RoleEnum
+  group: String
 }
 
 type LogoutResponse {
   message: String
+}
+
+input UserInput {
+  id: String
+  username: String
+  email: String
+  access: AccessInput
+}
+
+input AccessInput {
+  group: String
+  role: RoleEnum
 }

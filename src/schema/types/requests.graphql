@@ -1,0 +1,4 @@
+scalar Upload
+scalar Date
+directive @isAuthenticated on FIELD_DEFINITION
+directive @isForbidden(role: [String]) on FIELD_DEFINITION
