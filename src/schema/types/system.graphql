@@ -1,0 +1,70 @@
+type Query {
+  getSystemArgs: SystemArg! @isForbidden(role: ["ADMIN"])
+}
+
+type Mutation {
+  createBasicArgs(data: SystemArginput): SystemArg @isForbidden(role: ["ADMIN"])
+  createConferenceTopic(data: [String]): SystemArg @isForbidden(role: ["ADMIN"])
+  createOrganizerContact(data: [CreateOrganizerContactInput]): SystemArg
+    @isForbidden(role: ["ADMIN"])
+}
+
+type SystemArg {
+  conferenceName: Lang
+  conferenceTopic: [String]
+  conferenceAgenda: ConferenceAgenda
+  conferenceDate: ConferenceDate
+  organizerContact: OrganizerContact
+  conferenceStatus: Boolean
+}
+
+type Lang {
+  zh: String
+  en: String
+}
+
+type ConferenceAgenda {
+  location: String
+  agenda: String
+}
+
+type ConferenceDate {
+  submitDeadline: Date
+  noticeAccept: Date
+  endGame: Date
+  holdTime: Date
+}
+
+type OrganizerContact {
+  organizerName: String
+  organizerEmail: String
+  phone: String
+}
+
+input SystemArginput {
+  conferenceName: InputLang
+  conferenceAgenda: InputAgenda
+  conferenceDate: InputConferenceDate
+  conferenceStatus: Boolean
+}
+input InputLang {
+  zh: String
+  en: String
+}
+input InputAgenda {
+  location: String
+  agenda: String
+}
+
+input InputConferenceDate {
+  submitDeadline: String
+  noticeAccept: String
+  endGame: String
+  holdTime: String
+}
+
+input CreateOrganizerContactInput {
+  organizerName: String
+  organizerEmail: String
+  phone: String
+}
