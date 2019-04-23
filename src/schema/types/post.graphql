@@ -22,7 +22,7 @@ type Mutation {
   submitPost(data: SubmitPostData!, pictures: [Pictures]): Post!
     @isForbidden(role: ["ADMIN"])
     @isAuthenticated
-  updataPost(postPid: ID!, data: UpdatePostInput!): Post!
+  updatePost(postPid: ID!, data: UpdatePostInput!): Post!
     @isForbidden(role: ["ADMIN"])
     @isAuthenticated
   deletePost(postPid: ID!): deleteResponse

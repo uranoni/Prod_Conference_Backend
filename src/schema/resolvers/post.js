@@ -54,7 +54,7 @@ export default {
       const newPost = new ctx.db.Post(post);
       return newPost.save();
     },
-    updataPost: async (root, args, ctx) => {
+    updatePost: async (root, args, ctx) => {
       const post = await ctx.db.Post.findOne({ pid: args.postPid });
       if (!post)
         throw new UserInputError("Post pid is Not Found! pid: " + args.userPid);
