@@ -13,9 +13,8 @@ import dayjs from "dayjs";
 export default {
   Query: {
     getPosts: async (_, args, ctx) => {
-      const cloneSort = {
-        ...args.sort
-      };
+      const cloneSort = { ...args.sort };
+      const category = args.category || null;
       const getConfig = {
         skip: args.skip || 0,
         limit: args.limit || 0,
@@ -25,7 +24,7 @@ export default {
         }
       };
 
-      return ctx.db.Post.find()
+      return ctx.db.Post.find(category ? { category } : {})
         .limit(getConfig.limit)
         .skip(getConfig.skip)
         .sort({
