@@ -14,8 +14,8 @@ enum DeleteMsgEnum {
 }
 
 type Query {
-  getPosts(limit: Int, sort: SortInput, category: [String]): [Post]
-  getPost(pid: String): Post
+  getPosts(skip: Int, limit: Int, sort: SortInput, category: [String]): [Post]
+  getPost(postPid: String): Post
 }
 
 type Mutation {

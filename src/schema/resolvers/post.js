@@ -13,8 +13,27 @@ import dayjs from "dayjs";
 export default {
   Query: {
     getPosts: async (_, args, ctx) => {
-      return null;
-    }
+      const cloneSort = {
+        ...args.sort
+      };
+      const getConfig = {
+        skip: args.skip || 0,
+        limit: args.limit || 0,
+        sort: {
+          sortBy: cloneSort.sortBy || "ID",
+          postive: cloneSort.postive || "DESC"
+        }
+      };
+
+      return ctx.db.Post.find()
+        .limit(getConfig.limit)
+        .skip(getConfig.skip)
+        .sort({
+          [getConfig.sort.sortBy === "ID" ? "_id" : "updatedAt"]: getConfig.sort
+            .postive
+        });
+    },
+    getPost: (_, args, ctx) => ctx.db.Post.findOne({ pid: args.postPid })
   },
 
   Mutation: {
