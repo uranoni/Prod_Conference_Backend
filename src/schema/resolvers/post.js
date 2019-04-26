@@ -37,6 +37,7 @@ export default {
 
   Mutation: {
     submitPost: async (root, args, ctx) => {
+      console.log(ctx.user)
       const author = {
         author: ctx.user.username,
         contact: ctx.user.email
@@ -72,7 +73,7 @@ export default {
       try {
         await post.remove();
         return {
-          deleteMsg: "SUCCRSS",
+          deleteMsg: "SUCCESS",
           deletePid: args.postPid,
           title: post.title
         };

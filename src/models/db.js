@@ -4,6 +4,7 @@ import Comment from './comment'
 import Post from "./post";
 import LabelGroup from "./labelgroup"
 import System from "./system"
+import JurorPaper from "./jurorpaper"
 
 export default {
   User,
@@ -11,5 +12,6 @@ export default {
   Post,
   Comment,
   LabelGroup,
-  System
+  System,
+  JurorPaper
 }

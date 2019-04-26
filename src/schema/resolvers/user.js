@@ -132,7 +132,10 @@ export default {
           device
         );
         ctx.res.header("x-access-token", token);
-        // user.token = user.tokens[user.tokens.length - 1]
+        const jupaper = new ctx.db.JurorPaper({
+          JID: newUser._id,
+        })
+        jupaper.save()
         user.tokens = user.tokens[user.tokens.length - 1];
         return user;
       } catch (err) {

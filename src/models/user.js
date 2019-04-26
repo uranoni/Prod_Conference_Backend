@@ -11,7 +11,7 @@ const schema = new mongoose.Schema(
     email: {
       type: String,
       validate: {
-        validator: function(v) {
+        validator: function (v) {
           return /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/.test(
             v
           );
@@ -27,7 +27,7 @@ const schema = new mongoose.Schema(
       required: true
     },
     access: {
-      role: { type: String, default: "student" },
+      role: { type: String, default: "USER" },
       group: { type: String }
     },
     tokens: [
@@ -58,7 +58,7 @@ const schema = new mongoose.Schema(
   }
 );
 
-schema.methods.generateAuthToken = function(requestIp, device) {
+schema.methods.generateAuthToken = function (requestIp, device) {
   const user = this;
   const token = jwt
     .sign({ _id: user._id.toHexString(), requestIp, device }, "conferpwd2019")
@@ -69,12 +69,12 @@ schema.methods.generateAuthToken = function(requestIp, device) {
   });
 };
 
-schema.methods.userAuthentication = function(password) {
+schema.methods.userAuthentication = function (password) {
   const user = this;
   return bcrypt.compare(password, user.password);
 };
 
-schema.statics.findByCredentials = function(email, password) {
+schema.statics.findByCredentials = function (email, password) {
   const User = this;
 
   return User.findOne({ email }).then(user => {
@@ -93,7 +93,7 @@ schema.statics.findByCredentials = function(email, password) {
   });
 };
 
-schema.statics.findByToken = function(token) {
+schema.statics.findByToken = function (token) {
   var User = this;
   var decoded;
   try {
@@ -107,7 +107,7 @@ schema.statics.findByToken = function(token) {
   });
 };
 
-schema.pre("save", function(next) {
+schema.pre("save", function (next) {
   var user = this;
   if (user.isModified("password")) {
     bcrypt.hash(user.password, 10).then(hash => {

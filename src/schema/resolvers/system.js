@@ -27,13 +27,20 @@ export default {
         ...args.data
       }
       const ConferenArgs = new ctx.db.System(ConferenData);
+      console.log(ConferenArgs)
       try {
-        const result = await ConferenArgs.save()
-        console.log(result)
+        const result = await ctx.db.System.findOneAndUpdate({ argsdefault: "defaultargs" },
+          {
+            $set: {
+              ...args.data
+            }
+          },
+          { upsert: true, new: true, setDefaultsOnInsert: true })
         return result
       } catch (error) {
-        throw UserInputError("系統參數設定錯誤")
+        throw AuthenticationError("系統參數設定錯誤")
       }
+
     },
     createConferenceTopic: async () => null,
     createOrganizerContact: async () => null

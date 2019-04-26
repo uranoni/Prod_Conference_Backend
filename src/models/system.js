@@ -1,10 +1,13 @@
 const mongoose = require('mongoose');
 const _ = require('lodash');
 const SystemSchema = new mongoose.Schema({
+  argsdefault: {
+    type: String,
+    default: "defaultargs"
+  },
   conferenceName: {
     zh: {
       type: String,
-      default: "CDName",
       unique: true
     },
     en: {
@@ -78,25 +81,6 @@ SystemSchema.methods.removeDocument = function (createFile) {
   })
 }
 
-SystemSchema.methods.removeDocument = function (removeFileID) {
-  var system = this;
-  return system.updateOne({
-    $pull: {
-      conferenceDocument: {
-        _id: removeFileID
-      }
-    }
-  })
-}
-
-SystemSchema.methods.createOrganizerContact = function (gamecontact) {
-  var system = this;
-  return system.update({
-    $push: {
-      gamecontact
-    }
-  })
-}
 
 SystemSchema.methods.removeDocument = function (gamecontact) {
   var system = this;
