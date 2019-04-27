@@ -14,7 +14,8 @@ export default {
     getSystemArgs: async (root, args, ctx) => {
       try {
         const result = await ctx.db.System.find();
-        return result
+        console.log(result)
+        return result[0]
       } catch (error) {
         throw new AuthenticationError("使用者權限錯誤");
       }

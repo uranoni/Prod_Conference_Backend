@@ -1,0 +1,19 @@
+type Query{
+    getAllJurorPaper:[JurorOwenrList] @isAuthenticated
+}
+
+type Mutation{
+    addOnePaperToJuror( sid:String! , JID:String!):JurorOwenrList @isForbidden(role: ["ADMIN"])
+    @isAuthenticated
+}
+type JurorOwenrList{
+    JID:String
+    paperList:[PaperDetail]
+}
+type PaperDetail{
+    sid: String
+    title: String
+    status: Boolean
+    time: Date
+}
+

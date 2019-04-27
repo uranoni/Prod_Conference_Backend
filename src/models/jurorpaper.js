@@ -7,12 +7,12 @@ const schema = new mongoose.Schema({
         ref: "User"
     },
     paperList: [{
-        pid: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Submission"
+        sid: {
+            type: String,
+
         },
-        ptitle: String,
-        pstatus: Boolean,
+        title: String,
+        status: Boolean,
         time: Date,
     }],
 })

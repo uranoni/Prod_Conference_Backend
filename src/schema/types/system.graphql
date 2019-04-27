@@ -1,5 +1,5 @@
 type Query {
-  getSystemArgs: SystemArg! @isForbidden(role: ["ADMIN"])
+  getSystemArgs: SystemArg! 
 }
 
 type Mutation {
