@@ -5,13 +5,16 @@ type Query{
 type Mutation{
     addOnePaperToJuror( sid:String! , JID:String!):JurorOwenrList @isForbidden(role: ["ADMIN"])
     @isAuthenticated
+
+    changePaperStatus(status:Boolean! , sid:String!):JurorOwenrList! @isForbidden(role: ["JUROR"])
+    @isAuthenticated
 }
 type JurorOwenrList{
     JID:String
     paperList:[PaperDetail]
 }
 type PaperDetail{
-    sid: String
+    _id: String
     title: String
     status: Boolean
     time: Date

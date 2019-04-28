@@ -32,14 +32,15 @@ export default {
 
             try {
                 const paper = await ctx.db.Submission.findOne({ sid: args.sid })
-                console.log(paper.title)
-                const result = await ctx.db.JurorPaper.findOneAndUpdate({ JID: args.JID },
+                const result = await ctx.db.JurorPaper.findOneAndUpdate(
                     {
-                        $set: {
+                        JID: args.JID
+                    },
+                    {
+                        $addToSet: {
                             paperList: {
-                                sid: args.sid,
-                                title: paper.title,
-                                time: Date.now()
+                                _id: args.sid,
+                                title: paper.title
                             }
                         }
                     },
@@ -50,6 +51,31 @@ export default {
                 throw AuthenticationError("系統參數設定錯誤")
             }
         },
+        changePaperStatus: async (root, args, ctx) => {
+            try {
+                const JID = ctx.user.id
+                const paper = await ctx.db.Submission.findOne({ sid: args.sid })
+                const result = await ctx.db.JurorPaper.findOneAndUpdate(
+                    {
+                        "JID": JID,
+                        "paperList._id": args.sid
+                    },
+                    {
+                        $set: {
+                            "paperList.$._id": paper.sid,
+                            "paperList.$.title": paper.title,
+                            "paperList.$.status": args.status,
+                            "paperList.$.time": Date.now()
+
+                        }
+                    },
+                    { new: true })
+                console.log(result)
+                return result
+            } catch (error) {
+                throw AuthenticationError("found not")
+            }
+        }
         // JurorOwenrList: async () => null
     }
 }

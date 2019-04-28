@@ -122,7 +122,7 @@ export default {
         email,
         password,
         verifyToken,
-        "access.role": "juror",
+        "access.role": "JUROR",
         labels
       });
       try {
